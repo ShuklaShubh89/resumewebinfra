@@ -1,0 +1,13 @@
+- name: Automate-CDK
+  # You may pin to the exact commit or the version.
+  # uses: KikeMendez/automate-cdk-github-action-kmzz@e8cd34ff381b449714b86c28a8d695b973ed9faf
+  uses: KikeMendez/automate-cdk-github-action-kmzz@1.0.0
+  with:
+    # aws cdk version
+    cdk_version: # optional, default is latest
+    # cdk stack name
+    cdk_stack: # optional, default is *
+    # cdk stack location
+    cdk_stack_directory: # optional, default is *
+    # cdk action example: bootstrap | diff | deploy | synth
+    cdk_action: # default is bootstrap
