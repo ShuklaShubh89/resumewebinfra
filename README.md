@@ -1,4 +1,4 @@
-# Welcome to your CDK TypeScript project
+# CDK app for the resume website infrastructure. This deploys an api gateway backed by the lambda
 
 You should explore the contents of this project. It demonstrates a CDK app with an instance of a stack (`ResumewebinfraStack`)
 which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
