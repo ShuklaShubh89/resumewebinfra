@@ -21,7 +21,7 @@ jobs:
 
       # Deploy stacks
       - name: cdk deploy all stacks
-        uses: docker://ShuklaShubh89/cdkinfra-action:v0.1.0
+        uses: ShuklaShubh89/cdkinfra-action@master
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
