@@ -14,6 +14,23 @@ on:
   workflow_dispatch:
 
 jobs:
+#issue due to github actions https://github.com/aws/aws-cdk/issues/15179
+  configure:
+    runs-on: ubuntu-latest
+    outputs:
+      uid_gid: ${{ steps.get-user.outputs.uid_gid }}
+    steps:
+      - id: get-user
+        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
+
+  clone-and-install:
+    needs: configure
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
+      options: --user ${{ needs.configure.outputs.uid_gid }}
+    steps:
+      - uses: actions/checkout@v2
   deploy:
     runs-on: ubuntu-latest
     steps:
