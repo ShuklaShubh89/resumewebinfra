@@ -1,42 +1,18 @@
-# This is a basic workflow to help you get started with Actions
-
 name: CI
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
-#issue due to github actions https://github.com/aws/aws-cdk/issues/15179
-  configure:
-    runs-on: ubuntu-latest
-    outputs:
-      uid_gid: ${{ steps.get-user.outputs.uid_gid }}
-    steps:
-      - id: get-user
-        run: echo "::set-output name=uid_gid::$(id -u):$(id -g)"
-
-  clone-and-install:
-    needs: configure
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/vscode/devcontainers/base:ubuntu
-      options: --user ${{ needs.configure.outputs.uid_gid }}
-    steps:
-      - uses: actions/checkout@v2
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
-      # Deploy stacks
       - name: cdk deploy all stacks
         uses: ShuklaShubh89/cdkinfra-action@master
         env:
@@ -44,4 +20,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: 'us-east-1'
         with:
-          cdk_action: 'deploy --verbose --require-approval never'
+          #cdk_action: 'deploy --verbose --require-approval never'
+          cdk_action: 'synth'
